@@ -50,14 +50,14 @@ class UsuarioManager(models.Manager):
     
     def validaciones_login(self, postData):
         errores = {}
-        if len(postData["email"])<1:
+        if len(postData["email"]) == 0:
             errores["largo_email"] = "Debe ingresar algun email"
         if len(postData["password"])<8:
             errores["largo_contraseña"]="La contraseña debe tener al menos 8 caracteres"
         mail_existe = Usuario.objects.filter(email=postData["email"])
-        if len(mail_existe) == 0:
+        if not len(mail_existe)>0:
             errores["mail_no_existe"]="Este mail no está registrado"
-        if not bcrypt.checkpw(postData['password'].encode(), mail_existe[0].password.encode()):
+        elif not bcrypt.checkpw(postData['password'].encode(), mail_existe[0].password.encode()):
             errores['password']='Password incorrecta'
         return errores
             
