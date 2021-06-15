@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-light bg-light">
+            <div class="container-fluid">
+                <form action="/logout" method="POST" class="d-flex">
+                    {% csrf_token %}
+                    <button class="btn btn-outline-success" >Log Out</button>
+                </form>
+            </div>
+        </nav>
+
+        <h1>Success! Welcome {{ usuario.first_name }}</h1>
+
+        <h2 class="$green-500">Succesfully register (or logged in)!</h2>
+
+    </div>
+</body>
+</html>
