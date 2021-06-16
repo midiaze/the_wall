@@ -2,6 +2,7 @@ import re
 from django.db import models
 from django.db.models.deletion import CASCADE
 from datetime import datetime, timedelta, timezone
+from django.utils.timezone import now
 
 # Create your models here.
 class MensajesManager(models.Manager):
@@ -28,6 +29,7 @@ class Mensajes(models.Model):
     class Meta:
         ordering = ['-created_at']
 
+
 class Comentarios(models.Model):
     comentario = models.TextField()
     mensaje = models.ForeignKey(Mensajes,on_delete=CASCADE,related_name="comentarios")
@@ -36,8 +38,9 @@ class Comentarios(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     objects = ComentariosManager()
 
+    #@property
     def puede_eliminar(self):
-        hace_30 = datetime.now() - timedelta(minutes=30)
+        hace_30 = now() - timedelta(minutes=30)
         return self.created_at.replace(tzinfo=None) > hace_30.replace(tzinfo=None)
 
 
